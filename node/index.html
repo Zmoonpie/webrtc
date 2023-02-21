@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/socket.io/2.1.1/socket.io.js"></script>
+
+</head>
+
+<body>
+    <button onclick="send()">123</button>
+    <script>
+        // let constraints = { video: true, audio: true }
+
+        // function handleError(error) {
+        //     console.error('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
+        // }
+
+        // /**
+        //  * 获取设备 stream
+        //  * @param constraints
+        //  * @returns {Promise<MediaStream>}
+        //  */
+        // async function getLocalUserMedia(constraints) {
+        //     return await navigator.mediaDevices.getUserMedia(constraints)
+        // }
+
+        // let stream =   this.getLocalUserMedia(constraints).catch(handleError);
+        // console.log(stream)
+    </script>
+
+    <script>
+
+        function send() { 
+            socket.emit('msg', 'welcome')
+        }
+
+        let socket = io("ws://localhost:3000?userId=1&roomId=1", {
+            reconnectionDelayMax: 10000,
+            transports: ["websocket"],
+        });
+        socket.on('connect', function () {
+            console.log('connect')
+        })
+        socket.on('msg', function (data) {
+            console.log(data)
+        })
+
+
+
+        socket.onerror = function (error) {
+            console.log(`[error] ${error.message}`);
+        };
+
+
+    </script>
+</body>
+
+</html>
