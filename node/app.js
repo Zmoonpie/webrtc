@@ -95,7 +95,7 @@ async function onListen(s) {
     if (userMap.get(targetUid)) {
       oneToOne(targetUid, getMsg("candidate", "ice candidate", 200, data));
     } else {
-      console.log(targetUid + "不在线");
+      console.log(targetUid + "不在线"); 
     }
   });
   s.on("offer", (data) => {
